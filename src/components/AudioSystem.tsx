@@ -4,16 +4,26 @@ import { useEffect, useRef, useState } from "react"
 import { Volume2, VolumeX } from "lucide-react"
 
 export default function AudioSystem() {
-  const [isMuted, setIsMuted] = useState(true)
-  const [hasInteracted, setHasInteracted] = useState(false)
+  const [isMuted, setIsMuted] = useState(false)
+  const [hasInteracted, setHasInteracted] = useState(true)
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
-    // We load audio from the public folder. Users can drop their own ambient.mp3 here.
+    // We load audio from the public folder.
     audioRef.current = new Audio("/audio/ambient.mp3")
     audioRef.current.loop = true
     audioRef.current.volume = 0.4
     
+    // Attempt automatic playback on load
+    const playPromise = audioRef.current.play()
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Autoplay was blocked by the browser. Fallback to click-to-play.
+        setIsMuted(true)
+        setHasInteracted(false)
+      })
+    }
+
     const handleInteraction = () => {
       if (!hasInteracted) {
         setHasInteracted(true)
