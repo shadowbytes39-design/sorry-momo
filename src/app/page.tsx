@@ -3,7 +3,6 @@ import CinematicIntro from "@/components/CinematicIntro";
 import MomoGallery from "@/components/MomoGallery";
 import WhatHappened from "@/components/WhatHappened";
 import WhyMomoMatters from "@/components/WhyMomoMatters";
-import VoiceFromTheHeart from "@/components/VoiceFromTheHeart";
 import MemoryUniverse from "@/components/MemoryUniverse";
 import FinalForgiveness from "@/components/FinalForgiveness";
 
@@ -18,7 +17,6 @@ export default function Home() {
       <MomoGallery />
       <WhatHappened />
       <WhyMomoMatters />
-      <VoiceFromTheHeart />
       <MemoryUniverse />
       <FinalForgiveness />
     </main>
